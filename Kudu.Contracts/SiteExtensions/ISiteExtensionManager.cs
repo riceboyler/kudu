@@ -6,7 +6,7 @@ namespace Kudu.Contracts.SiteExtensions
 {
     public interface ISiteExtensionManager
     {
-        Task<IEnumerable<SiteExtensionInfo>> GetRemoteExtensions(string filter, string version);
+        Task<IEnumerable<SiteExtensionInfo>> GetRemoteExtensions(string filter, bool allowPrereleaseVersions);
 
         Task<SiteExtensionInfo> GetRemoteExtension(string id, string version);
 

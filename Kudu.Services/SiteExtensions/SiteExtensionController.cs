@@ -16,9 +16,9 @@ namespace Kudu.Services.SiteExtensions
         }
 
         [HttpGet]
-        public async Task<IEnumerable<SiteExtensionInfo>> GetRemoteExtensions(string filter = null, string version = null)
+        public async Task<IEnumerable<SiteExtensionInfo>> GetRemoteExtensions(string filter = null, bool allowPrereleaseVersions = false)
         {
-            return await _manager.GetRemoteExtensions(filter, version);
+            return await _manager.GetRemoteExtensions(filter, allowPrereleaseVersions);
         }
 
         [HttpGet]

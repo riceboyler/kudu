@@ -16,7 +16,7 @@ namespace Kudu.Client.SiteExtensions
         {
         }
 
-        public async Task<IEnumerable<SiteExtensionInfo>> GetRemoteExtensions(string filter = null, string version = null)
+        public async Task<IEnumerable<SiteExtensionInfo>> GetRemoteExtensions(string filter = null, bool allowPrereleaseVersions = false)
         {
             var url = new StringBuilder(ServiceUrl);
             url.Append("remote");
@@ -30,12 +30,11 @@ namespace Kudu.Client.SiteExtensions
                 separator = '&';
             }
 
-            if (!String.IsNullOrEmpty(version))
+            if (allowPrereleaseVersions)
             {
                 url.Append(separator);
-                url.Append("filter=");
-                url.Append(filter);
-                separator = '&';
+                url.Append("allowPrereleaseVersions=");
+                url.Append(true);
             }
 
             return await Client.GetJsonAsync<IEnumerable<SiteExtensionInfo>>(url.ToString());
