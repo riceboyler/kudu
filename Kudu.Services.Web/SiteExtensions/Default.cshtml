@@ -175,7 +175,7 @@
                 type: "POST",
                 url: "/api/extensions",
                 contentType: "application/json",
-                data: JSON.stringify(extension),
+                data: extension.Id,
                 success: function () {
                 },
                 error: function (jqXhr, textStatus, errorThrown) {

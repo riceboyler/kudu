@@ -40,9 +40,9 @@ namespace Kudu.Services.SiteExtensions
         }
 
         [HttpPost]
-        public async Task<SiteExtensionInfo> InstallExtension(SiteExtensionInfo info)
+        public async Task<SiteExtensionInfo> InstallExtension(string id)
         {
-            return await _manager.InstallExtension(info);
+            return await _manager.InstallExtension(id);
         }
 
         [HttpDelete]

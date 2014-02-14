@@ -95,9 +95,9 @@ namespace Kudu.Client.SiteExtensions
             return await Client.GetJsonAsync<SiteExtensionInfo>(url.ToString());
         }
 
-        public async Task<SiteExtensionInfo> InstallExtension(SiteExtensionInfo info)
+        public async Task<SiteExtensionInfo> InstallExtension(string id)
         {
-            return await Client.PostJsonAsync<SiteExtensionInfo, SiteExtensionInfo>(String.Empty, info);
+            return await Client.PostJsonAsync<string, SiteExtensionInfo>(String.Empty, id);
         }
 
         public async Task<bool> UninstallExtension(string id)
