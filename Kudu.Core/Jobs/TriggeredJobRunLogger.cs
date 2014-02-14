@@ -35,7 +35,7 @@ namespace Kudu.Core.Jobs
         }
 
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "We do not want to accept jobs which are not TriggeredJob")]
-        public static TriggeredJobRunLogger LogNewRun(TriggeredJob triggeredJob, IEnvironment environment,  ITraceFactory traceFactory, IDeploymentSettingsManager settings)
+        public static TriggeredJobRunLogger LogNewRun(TriggeredJob triggeredJob, IEnvironment environment, ITraceFactory traceFactory, IDeploymentSettingsManager settings)
         {
             OldRunsCleanup(triggeredJob.Name, environment, traceFactory, settings);
 
@@ -95,6 +95,14 @@ namespace Kudu.Core.Jobs
             var triggeredJobStatus = ReadJobStatusFromFile<TriggeredJobStatus>(TraceFactory, GetStatusFilePath()) ?? new TriggeredJobStatus();
             triggeredJobStatus.Status = status;
             ReportStatus(triggeredJobStatus);
+        }
+
+        public string Id
+        {
+            get
+            {
+                return _id;
+            }
         }
 
         protected override string HistoryPath
