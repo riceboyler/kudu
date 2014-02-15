@@ -58,10 +58,9 @@ namespace Kudu.Core.SiteExtensions
         public async Task<IEnumerable<SiteExtensionInfo>> GetLocalExtensions(string filter, bool update_info)
         {
             return await Task.Run(() =>
-            {
-                return _remoteRepository.Search(filter, true).AsEnumerable()
-                                                             .Select(SiteExtensionInfo.ConvertFrom);
-            });
+                _localRepository.Search(filter, true).AsEnumerable()
+                                                     .Select(SiteExtensionInfo.ConvertFrom)
+            );
         }
 
         public async Task<SiteExtensionInfo> GetLocalExtension(string id, bool update_info)
@@ -76,7 +75,7 @@ namespace Kudu.Core.SiteExtensions
                 IPackage package = _remoteRepository.FindPackage(id);
                 var installationDirectory = _localRepository.Source + package.GetFullName();
 
-                foreach (var file in package.GetContentFiles())
+                foreach (var file in package.GetFiles())
                 {
                     var fullPath = Path.Combine(installationDirectory, file.Path);
                     FileSystemHelpers.CreateDirectory(Path.GetDirectoryName(fullPath));
